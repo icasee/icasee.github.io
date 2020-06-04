@@ -1,0 +1,411 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>五色學倉頡 2</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<style type="text/css">
+html,body{
+	margin: 0;
+	padding: 0;
+	background: #ccc;
+}
+div.header{
+	background: #000;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 8%;
+	color: white;
+}
+div.header table{
+	width: 40%;
+	height: 90%;
+	position: relative;
+	top:5%;
+}
+div.header td{
+	background: #000;
+	text-align: center;
+	width: 25%;
+	border-left: 1px solid white;
+}
+div.header td:first-Child{
+	border-left: 0;	
+}
+div.header td.current::before{
+	content: "出字數目：";
+}
+div.header td.correct::before{
+	content: "正確：";
+}
+div.header td.correct span{
+	color: green;
+}
+div.header td.wrong::before{
+	content: "錯誤：";
+}
+div.header td.wrong span{
+	color: red;
+}
+div.header td.reward::before{
+	content: "獎勵：";
+}
+div.header td.reward span{
+	color: blue;
+}
+div.header img.table{
+	position: absolute;
+	top:10%;
+	right: 10px;
+}
+div.header img{
+	height: 75%;
+}
+div.word{
+	position: fixed;
+	width: 100%;
+	top:8%;
+	height: 61%;
+	text-align: center;
+	background: -webkit-linear-gradient(top,#1a9dc4 0%,#35d3e1 100%);
+}
+div.word div.wrap{
+	height: 100%;
+	position: relative;
+	
+}
+div.word img{
+	margin-top:10;
+	vertical-align: middle;
+}
+div.word div.text{
+	width: 100%;
+	text-align: center;
+	position: absolute;
+	bottom: 0;
+	height: 13%;
+	font-size: 250%;
+	color: white;
+	text-shadow: 0 0 5px #000;
+}
+div.guide{
+	text-align: center;
+	position: fixed;
+	top:0;
+	left:0;
+	height: 100%;
+	width: 100%;
+	background: rgba(0, 0, 0, 0.9);
+	z-index: 999;
+	display: none;
+}
+div.guide img{
+	margin: 0 auto;
+}
+div.keyboard{
+	background: linear-gradient(to bottom,#fefefe 0%,#cbccce 100%);
+	padding: 5px;
+	z-index: 99;
+	margin: 0 auto;
+	width: 100%;
+	height: 30%;
+	text-align: center;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+}
+div.keyboard div.wrap{
+	height: 100%;
+}
+div.keyboard button{
+	margin: 5px;
+	background: #272727;
+	color: #666;
+	border-radius: 5px;
+	font-size: 130%;
+    width: 7.5%;
+    height: 28%;
+}
+div.keyboard button.correct{
+	background: rgb(115, 187, 24);
+}
+div.keyboard button.wrong{
+	background: rgb(245, 47, 29);
+}
+div.keyboard span{
+	margin-left: 5px;
+	font-size: 110%;
+	color: white;
+}
+ul.history{
+	display: none;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	overflow: scroll;
+	width: 200px;
+	height: 80%;
+	border:1px solid red;
+}
+ul.history li{
+	margin: 0;
+	padding: 0 0 0 10px;
+	text-align: left;
+}
+audio{
+	position: fixed;
+	top:100px;
+	left:10px;
+}
+#SPACE{
+	width: 18%;
+}
+</style>
+<body>
+
+<div class="header">
+	<table>
+		<tr>
+			<td class="current"><span>0</span></td>
+			<td class="correct"><span>0</span></td>
+			<td class="wrong"><span>0</span></td>
+			<td class="reward"><span>0</span></td>
+		</tr>
+	</table>
+	<img src="table.png" class="table">
+</div>
+
+<div class="word">
+	<ul class="history">
+		<li>11234</li>
+		<li>11234</li>
+		<li>11234</li>
+		<li>11234</li>
+		<li>11234</li>
+		<li>11234</li>
+	</ul>
+		
+	<div class="wrap">
+		<img src="http://localhost/fcj_word/assets/quick_word/1-500/422.PNG">
+		<div class="text"></div>
+	</div>
+</div>
+
+<div class="keyboard">
+	<div class="wrap">
+		<button id="Q">Q<span>手</span></button>
+		<button id="W">W<span>田</span></button>
+		<button id="E">E<span>水</span></button>
+		<button id="R">R<span>口</span></button>
+		<button id="T">T<span>廿</span></button>
+		<button id="Y">Y<span>卜</span></button>
+		<button id="U">U<span>山</span></button>
+		<button id="I">I<span>戈</span></button>
+		<button id="O">O<span>人</span></button>
+		<button id="P">P<span>心</span></button>
+		<br/>
+		<button id="A">A<span>日</span></button>
+		<button id="S">S<span>尸</span></button>
+		<button id="D">D<span>木</span></button>
+		<button id="F">F<span>火</span></button>
+		<button id="G">G<span>土</span></button>
+		<button id="H">H<span>竹</span></button>
+		<button id="J">J<span>十</span></button>
+		<button id="K">K<span>大</span></button>
+		<button id="L">L<span>中</span></button>
+		<br/>
+		<button id="X">X<span>難</span></button>
+		<button id="C">C<span>金</span></button>
+		<button id="V">V<span>女</span></button>
+		<button id="SPACE">&nbsp;</button>
+		<button id="B">B<span>月</span></button>
+		<button id="N">N<span>弓</span></button>
+		<button id="M">M<span>一</span></button>
+	</div>
+</div>
+<div class="guide" id="guideRight">
+	<img src="./key_table.png">
+</div>
+<div class="guide" id="guideLeft">
+	<img src="./key_table.png">
+</div>
+<audio controls>
+<source src="http://localhost/fcj_word/assets/cantoness/501-1000/501.MP3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+<script type="text/javascript">
+console.log(236, localStorage);
+if (parseInt(localStorage.index | 0) > 5 && parseInt(localStorage.reward | 0) > 10) {
+	setTimeout(function(){
+		updateReward(-1);
+	}, 1000);
+}
+var current, correct=0, wrong=0, index = 0;
+var guideLeft = document.querySelector('#guideLeft');
+var guideRight = document.querySelector('#guideRight');
+var input = document.querySelector('div.text');
+document.addEventListener('keyup', function(e){
+	if (e.key == 'Shift') {
+		guideLeft.style.display = 'none';
+		guideRight.style.display = 'none';
+	} else if (e.keyCode > 64 && e.keyCode < 90) {
+		var id = String.fromCharCode(e.keyCode);
+		document.getElementById(id).classList.remove("correct");
+	}
+
+});	
+document.addEventListener('keydown', logKey);
+
+window.addEventListener('focus', function(){
+	//updateReward(-1);
+}, false);
+
+$('td.reward>span').click(function(){
+	var diff = getRemain();
+	//玩遊戲25分鐘+休息60分鐘=85分鐘
+	if (getHours() > 20) {
+		alert('九點幾啦大佬，吾使訓啊');
+	} else if (getHours() < 12) {
+		alert('食左都餐未？朝早要溫書先.');
+	} else if (diff > 0) {
+		alert('休息吓啦香港人,仲有' + diff + '分鐘.');
+		updateReward(-1);
+	} else if (localStorage.reward > 200) {
+		if (confirm('你是否用300積分換取25分鐘？')) {
+			localStorage.update = getTime()
+			updateReward(-200)
+			alert(getKeyCode());
+		}
+	} else {
+		alert('你的積分不夠啦，努力做點功課吧。');
+	}
+})
+
+$.getJSON( "./fcj_word.json", function( data ) {
+	window.data = data;
+	start()
+});
+
+function getRemain(){
+	var update = parseInt(localStorage.update || 0);
+	//21:00
+	return 80 - Math.floor((getTime() - update) / 60000);
+	//22:00
+	//return 105 - Math.floor((getTime() - update) / 60000);
+	//23:00
+	//return 125 - Math.floor((getTime() - update) / 60000);
+	//24:00
+	//return 145 - Math.floor((getTime() - update) / 60000);
+}
+
+function updateReward(mask) {
+	if (getHours() == 12 || getHours() == 15 || getHours() == 18) {
+		localStorage.reward = parseInt(localStorage.reward) + mask;
+		$('td.reward>span').text(localStorage.reward);
+	}
+}
+
+function getKeyCodex(){
+	var time = getTime();
+	return (time.toString(35)+time.toString(36)).toUpperCase();
+}
+
+function getKeyCode(){
+  var a=getTime();
+  var b="20";
+  var d="8"+a.toString().substr(-3);
+  var c=d+''+b+''+a;
+  //console.log(29, d+b, a);
+  return (parseInt(d+b).toString(35)+'z'+parseInt(a).toString(35)).toUpperCase();
+}
+
+function getTime(){
+	return (new Date()).getTime();
+}
+
+function getHours(){
+	return (new Date()).getHours();
+}
+
+function getMinutes(){
+	var d1=new Date();
+	return d1.getHours()*60+d1.getMinutes();
+}
+
+
+function start(){
+	current = data[index];
+	input.innerText = '';
+	$('div.wrap img').attr('src', "http://localhost/fcj_word/assets/quick_word" + current.image);
+	$('source').attr('src', "http://localhost/fcj_word/assets/cantoness" + current.image.replace('PNG', 'MP3'));
+	document.querySelector('audio').load();
+	//$('div.wrap img').attr('src', "/fcj_word/word_black" + current.image);
+	//$('div.wrap img').attr('src', "/fcj_word/fcj_word" + current.image);
+	
+	if (index < data.length) {
+		index++;	
+	} else {
+		index=0;
+	}
+	$('td.current>span').text(index);
+	$('td.correct>span').text(correct);
+	$('td.wrong>span').text(wrong);
+	$('td.reward>span').text(localStorage.reward);
+	localStorage.index = index;
+	localStorage.setItem("correct", correct);
+	localStorage.setItem("wrong", wrong);
+}
+
+function logKey(e) {
+	if (e.keyCode > 64 && e.keyCode < 90) {
+		var id = String.fromCharCode(e.keyCode);
+		var element = document.getElementById(id);
+		element.classList.add("correct");
+		var a = element.innerText.substring(1);
+		var b = input.innerText;
+		if (b.length < 10) {
+			input.innerText += a;
+		}
+	} 
+	switch(e.code) {
+		case "Backspace":
+			if (input.innerText.length > 0) {
+				input.innerText = input.innerText.substring(0, input.innerText.length -1);		
+			}
+			break;
+		case "ShiftLeft": //Shift
+			guideLeft.style.display = 'block';
+			break;
+		case "ShiftRight": //Shift
+			guideRight.style.display = 'block';
+			break;
+		case "Space":
+			if (input.innerText == current.quick) {	
+				correct++;
+				updateReward(1);
+				start()	
+			} else if(input.innerText != '') {
+				alert('正確答案:'+current.quick);	
+				wrong++;
+				updateReward(-1);
+				start()
+			} else {
+				document.querySelector('audio').play();
+			}
+			break;
+		default:
+			console.log(102, e.code, e);
+	}
+}
+
+function hello(){
+	$('td.reward>span').text(localStorage.reward)
+}
+</script>
+</body>
+</html>

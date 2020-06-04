@@ -1,0 +1,286 @@
+<html lang="zh-hk">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <meta name="apple-itunes-app" content="app-id=480933058">
+    <title>TV Remote</title>
+<script type="text/javascript">
+// --------------------------------------------------------------------------------
+// Maps each command to  IRCC code.  Use COMMAND_MAP[command] to access.
+const COMMAND_MAP = {};
+COMMAND_MAP['Num1'] = 'AAAAAQAAAAEAAAAAAw==';
+COMMAND_MAP['Num2'] = 'AAAAAQAAAAEAAAABAw==';
+COMMAND_MAP['Num3'] = 'AAAAAQAAAAEAAAACAw==';
+COMMAND_MAP['Num4'] = 'AAAAAQAAAAEAAAADAw==';
+COMMAND_MAP['Num5'] = 'AAAAAQAAAAEAAAAEAw==';
+COMMAND_MAP['Num6'] = 'AAAAAQAAAAEAAAAFAw==';
+COMMAND_MAP['Num7'] = 'AAAAAQAAAAEAAAAGAw==';
+COMMAND_MAP['Num8'] = 'AAAAAQAAAAEAAAAHAw==';
+COMMAND_MAP['Num9'] = 'AAAAAQAAAAEAAAAIAw==';
+COMMAND_MAP['Num0'] = 'AAAAAQAAAAEAAAAJAw==';
+// COMMAND_MAP['Num11'] = 'AAAAAQAAAAEAAAAKAw==';
+// COMMAND_MAP['Num12'] = 'AAAAAQAAAAEAAAALAw==';
+COMMAND_MAP['Enter'] = 'AAAAAQAAAAEAAAALAw==';
+// COMMAND_MAP['GGuide'] = 'AAAAAQAAAAEAAAAOAw==';
+COMMAND_MAP['ChannelUp'] = 'AAAAAQAAAAEAAAAQAw==';
+COMMAND_MAP['ChannelDown'] = 'AAAAAQAAAAEAAAARAw==';
+COMMAND_MAP['VolumeUp'] = 'AAAAAQAAAAEAAAASAw==';
+COMMAND_MAP['VolumeDown'] = 'AAAAAQAAAAEAAAATAw==';
+COMMAND_MAP['Mute'] = 'AAAAAQAAAAEAAAAUAw==';
+COMMAND_MAP['TvPower'] = 'AAAAAQAAAAEAAAAVAw==';
+// COMMAND_MAP['Audio'] = 'AAAAAQAAAAEAAAAXAw==';
+// COMMAND_MAP['MediaAudioTrack'] = 'AAAAAQAAAAEAAAAXAw==';
+COMMAND_MAP['Tv'] = 'AAAAAQAAAAEAAAAkAw==';
+// COMMAND_MAP['Input'] = 'AAAAAQAAAAEAAAAlAw==';
+// COMMAND_MAP['TvInput'] = 'AAAAAQAAAAEAAAAlAw==';
+// COMMAND_MAP['TvAntennaCable'] = 'AAAAAQAAAAEAAAAqAw==';
+// COMMAND_MAP['WakeUp'] = 'AAAAAQAAAAEAAAAuAw==';
+// COMMAND_MAP['PowerOff'] = 'AAAAAQAAAAEAAAAvAw==';
+// COMMAND_MAP['Sleep'] = 'AAAAAQAAAAEAAAAvAw==';
+COMMAND_MAP['Right'] = 'AAAAAQAAAAEAAAAzAw==';
+COMMAND_MAP['Left'] = 'AAAAAQAAAAEAAAA0Aw==';
+// COMMAND_MAP['SleepTimer'] = 'AAAAAQAAAAEAAAA2Aw==';
+// COMMAND_MAP['Analog2'] = 'AAAAAQAAAAEAAAA4Aw==';
+// COMMAND_MAP['TvAnalog'] = 'AAAAAQAAAAEAAAA4Aw==';
+// COMMAND_MAP['Display'] = 'AAAAAQAAAAEAAAA6Aw==';
+// COMMAND_MAP['Jump'] = 'AAAAAQAAAAEAAAA7Aw==';
+// COMMAND_MAP['PicOff'] = 'AAAAAQAAAAEAAAA+Aw==';
+// COMMAND_MAP['PictureOff'] = 'AAAAAQAAAAEAAAA+Aw==';
+// COMMAND_MAP['Teletext'] = 'AAAAAQAAAAEAAAA/Aw==';
+// COMMAND_MAP['Video1'] = 'AAAAAQAAAAEAAABAAw==';
+// COMMAND_MAP['Video2'] = 'AAAAAQAAAAEAAABBAw==';
+// COMMAND_MAP['AnalogRgb1'] = 'AAAAAQAAAAEAAABDAw==';
+COMMAND_MAP['Home'] = 'AAAAAQAAAAEAAABgAw==';
+COMMAND_MAP['Exit'] = 'AAAAAQAAAAEAAABjAw==';
+// COMMAND_MAP['PictureMode'] = 'AAAAAQAAAAEAAABkAw==';
+// COMMAND_MAP['Confirm'] = 'AAAAAQAAAAEAAABlAw==';
+COMMAND_MAP['Up'] = 'AAAAAQAAAAEAAAB0Aw==';
+COMMAND_MAP['Down'] = 'AAAAAQAAAAEAAAB1Aw==';
+// COMMAND_MAP['ClosedCaption'] = 'AAAAAgAAAKQAAAAQAw==';
+// COMMAND_MAP['Component1'] = 'AAAAAgAAAKQAAAA2Aw==';
+// COMMAND_MAP['Component2'] = 'AAAAAgAAAKQAAAA3Aw==';
+// COMMAND_MAP['Wide'] = 'AAAAAgAAAKQAAAA9Aw==';
+// COMMAND_MAP['EPG'] = 'AAAAAgAAAKQAAABbAw==';
+// COMMAND_MAP['PAP'] = 'AAAAAgAAAKQAAAB3Aw==';
+// COMMAND_MAP['TenKey'] = 'AAAAAgAAAJcAAAAMAw==';
+// COMMAND_MAP['BSCS'] = 'AAAAAgAAAJcAAAAQAw==';
+// COMMAND_MAP['Ddata'] = 'AAAAAgAAAJcAAAAVAw==';
+// COMMAND_MAP['Stop'] = 'AAAAAgAAAJcAAAAYAw==';
+// COMMAND_MAP['Pause'] = 'AAAAAgAAAJcAAAAZAw==';
+// COMMAND_MAP['Play'] = 'AAAAAgAAAJcAAAAaAw==';
+// COMMAND_MAP['Rewind'] = 'AAAAAgAAAJcAAAAbAw==';
+// COMMAND_MAP['Forward'] = 'AAAAAgAAAJcAAAAcAw==';
+// COMMAND_MAP['DOT'] = 'AAAAAgAAAJcAAAAdAw==';
+// COMMAND_MAP['Rec'] = 'AAAAAgAAAJcAAAAgAw==';
+COMMAND_MAP['Return'] = 'AAAAAgAAAJcAAAAjAw==';
+// COMMAND_MAP['Blue'] = 'AAAAAgAAAJcAAAAkAw==';
+// COMMAND_MAP['Red'] = 'AAAAAgAAAJcAAAAlAw==';
+// COMMAND_MAP['Green'] = 'AAAAAgAAAJcAAAAmAw==';
+// COMMAND_MAP['Yellow'] = 'AAAAAgAAAJcAAAAnAw==';
+// COMMAND_MAP['SubTitle'] = 'AAAAAgAAAJcAAAAoAw==';
+// COMMAND_MAP['CS'] = 'AAAAAgAAAJcAAAArAw==';
+// COMMAND_MAP['BS'] = 'AAAAAgAAAJcAAAAsAw==';
+// COMMAND_MAP['Digital'] = 'AAAAAgAAAJcAAAAyAw==';
+// COMMAND_MAP['Options'] = 'AAAAAgAAAJcAAAA2Aw==';
+// COMMAND_MAP['Media'] = 'AAAAAgAAAJcAAAA4Aw==';
+// COMMAND_MAP['Prev'] = 'AAAAAgAAAJcAAAA8Aw==';
+// COMMAND_MAP['Next'] = 'AAAAAgAAAJcAAAA9Aw==';
+COMMAND_MAP['DpadCenter'] = 'AAAAAgAAAJcAAABKAw==';
+// COMMAND_MAP['CursorUp'] = 'AAAAAgAAAJcAAABPAw==';
+// COMMAND_MAP['CursorDown'] = 'AAAAAgAAAJcAAABQAw==';
+// COMMAND_MAP['CursorLeft'] = 'AAAAAgAAAJcAAABNAw==';
+// COMMAND_MAP['CursorRight'] = 'AAAAAgAAAJcAAABOAw==';
+// COMMAND_MAP['ShopRemoteControlForcedDynamic'] = 'AAAAAgAAAJcAAABqAw==';
+// COMMAND_MAP['FlashPlus'] = 'AAAAAgAAAJcAAAB4Aw==';
+// COMMAND_MAP['FlashMinus'] = 'AAAAAgAAAJcAAAB5Aw==';
+// COMMAND_MAP['AudioQualityMode'] = 'AAAAAgAAAJcAAAB7Aw==';
+// COMMAND_MAP['DemoMode'] = 'AAAAAgAAAJcAAAB8Aw==';
+// COMMAND_MAP['Analog'] = 'AAAAAgAAAHcAAAANAw==';
+// COMMAND_MAP['Mode3D'] = 'AAAAAgAAAHcAAABNAw==';
+// COMMAND_MAP['DigitalToggle'] = 'AAAAAgAAAHcAAABSAw==';
+// COMMAND_MAP['DemoSurround'] = 'AAAAAgAAAHcAAAB7Aw==';
+// COMMAND_MAP['*AD'] = 'AAAAAgAAABoAAAA7Aw==';
+// COMMAND_MAP['AudioMixUp'] = 'AAAAAgAAABoAAAA8Aw==';
+// COMMAND_MAP['AudioMixDown'] = 'AAAAAgAAABoAAAA9Aw==';
+// COMMAND_MAP['PhotoFrame'] = 'AAAAAgAAABoAAABVAw==';
+// COMMAND_MAP['Tv_Radio'] = 'AAAAAgAAABoAAABXAw==';
+// COMMAND_MAP['SyncMenu'] = 'AAAAAgAAABoAAABYAw==';
+// COMMAND_MAP['Hdmi1'] = 'AAAAAgAAABoAAABaAw==';
+// COMMAND_MAP['Hdmi2'] = 'AAAAAgAAABoAAABbAw==';
+// COMMAND_MAP['Hdmi3'] = 'AAAAAgAAABoAAABcAw==';
+// COMMAND_MAP['Hdmi4'] = 'AAAAAgAAABoAAABdAw==';
+// COMMAND_MAP['TopMenu'] = 'AAAAAgAAABoAAABgAw==';
+// COMMAND_MAP['PopUpMenu'] = 'AAAAAgAAABoAAABhAw==';
+// COMMAND_MAP['OneTouchTimeRec'] = 'AAAAAgAAABoAAABkAw==';
+// COMMAND_MAP['OneTouchView'] = 'AAAAAgAAABoAAABlAw==';
+// COMMAND_MAP['DUX'] = 'AAAAAgAAABoAAABzAw==';
+// COMMAND_MAP['FootballMode'] = 'AAAAAgAAABoAAAB2Aw==';
+// COMMAND_MAP['iManual'] = 'AAAAAgAAABoAAAB7Aw==';
+COMMAND_MAP['Netflix'] = 'AAAAAgAAABoAAAB8Aw==';
+// COMMAND_MAP['Assists'] = 'AAAAAgAAAMQAAAA7Aw==';
+// COMMAND_MAP['ActionMenu'] = 'AAAAAgAAAMQAAABLAw==';
+// COMMAND_MAP['Help'] = 'AAAAAgAAAMQAAABNAw==';
+// COMMAND_MAP['TvSatellite'] = 'AAAAAgAAAMQAAABOAw==';
+// COMMAND_MAP['WirelessSubwoofer'] = 'AAAAAgAAAMQAAAB+Aw==';
+
+var SONY_TV_URL_PREFIX = 'http://';
+var SONY_TV_IP = '192.168.31.166';
+var SONY_TV_URL_SUFFIX = '/sony/IRCC';
+var SONY_TV_PRESHARED_KEY = 'pass1258'
+function sendCommand(code) {
+  //var code = 'AAAAAQAAAAEAAAASAw==';
+  const tv_url = SONY_TV_URL_PREFIX + SONY_TV_IP + SONY_TV_URL_SUFFIX;
+  console.log(9, tv_url, code);
+	const req = new XMLHttpRequest();
+	req.onreadystatechange = function() {
+    if (req.readyState == 4) {
+      console.log(13, req.readyState, req.status);
+    }
+	}
+	req.open('POST', tv_url, true);
+    req.setRequestHeader('Content-Type', 'text/xml; charset=UTF-8');
+    req.setRequestHeader('SOAPAction', '"urn:schemas-sony-com:service:IRCC:1#X_SendIRCC"');
+    req.setRequestHeader('X-Auth-PSK', SONY_TV_PRESHARED_KEY);
+    const data =
+      `<?xml version="1.0"?>
+      <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+        <s:Body>
+          <u:X_SendIRCC xmlns:u="urn:schemas-sony-com:service:IRCC:1">
+            <IRCCCode>${code}</IRCCCode>
+          </u:X_SendIRCC>
+        </s:Body>
+      </s:Envelope>`;
+    req.timeout = 3000; // in milliseconds
+    req.send(data);
+}
+</script>
+<style type="text/css">
+html, body{
+  background: #111;
+}
+table{
+  border: 1px solid #ccc;
+  background: #333;
+  border-collapse: 0;
+  border-spacing: 5px;
+}
+td{
+  text-align: center;
+}
+button {
+  width: 70px;
+  height: 40px;
+  border: 0;
+  border-radius: 5px;
+  color: black;
+  background: linear-gradient(to bottom, hsl(207, 25%, 87%), hsl(207, 25%, 75%));
+  box-shadow:
+    rgba(  0,  0,  0,0.5)  0px  1px 2px 2px,
+    rgba(  0,  0,  0,0.5) -1px -3px 3px 0px inset,
+    rgba(255,255,255,0.5)  1px  3px 3px 0px inset;
+}
+button:hover {
+  box-shadow:
+    /* An extra outline has been added. */
+    rgba(  0,  0,  0,0.5)  0px  1px 2px 1px inset,
+    /* The others are copied from non-:active rule. */
+    rgba(  0,  0,  0,0.5)  0px  1px 2px 2px,
+    rgba(  0,  0,  0,0.5) -1px -3px 3px 0px inset,
+    rgba(255,255,255,0.5)  1px  3px 3px 0px inset;
+}
+
+button.color-red {
+  color: white;
+  background: linear-gradient(to bottom, hsl(0, 50%, 46%), hsl(0, 50%, 33%));
+}
+button.color-green {
+  color: white;
+  background: linear-gradient(to bottom, hsl(50%, 50%, 46%), hsl(50%, 50%, 33%));
+}
+button.color-white {
+  color: black;
+  background: linear-gradient(to bottom, hsl(230, 0%, 90%), hsl(230, 0%, 75%));
+}
+button.color-black {
+  color: white;
+  background: linear-gradient(to bottom, hsl(0, 0%, 25%), hsl(0, 0%, 13%));
+}
+button.color-slateblue {
+  color: black;
+  background: linear-gradient(to bottom, hsl(230, 50%, 63%), hsl(230, 50%, 75%));
+}
+button.text-large {
+  font-size: 1.75em !important;
+}
+</style>
+<table align="center" border="0">
+  <tr>
+    <td><button id='Tv'>TV</button></td>
+    <td></td>
+    <td><button id='TvPower' class="text-large color-red">⎋</button></td>
+</tr>  
+<tr>
+    <td><button id='Num1' class="text-large color-white">1</button></td>
+    <td><button id='Num2' class="text-large color-white">2</button></td>
+    <td><button id='Num3' class="text-large color-white">3</button></td>
+</tr>  
+<tr>
+    <td><button id='Num4' class="text-large color-white">4</button></td>
+    <td><button id='Num5' class="text-large color-white">5</button></td>
+    <td><button id='Num6' class="text-large color-white">6</button></td>
+</tr>
+<tr>
+    <td><button id='Num7' class="text-large color-white">7</button></td>
+    <td><button id='Num8' class="text-large color-white">8</button></td>
+    <td><button id='Num9' class="text-large color-white">9</button></td>
+</tr>
+<tr>
+    <td><button id='DpadCenter' class="color-green">OK</button></td>
+    <td><button id='Num0' class="text-large color-white">0</button></td>
+    <td><button id='Netflix' class="color-red">NETFLIX</button></td>
+</tr>
+<tr>
+    <td><button id='VolumeUp' class="text-large color-slateblue">🔊</button></td>
+    <td><button id='Mute' class="text-large color-slateblue">🔇</button></td>
+    <td><button id='ChannelUp' class="text-large color-slateblue">CH+</button></td>
+</tr>
+<tr>
+    <td><button id='VolumeDown' class="text-large color-slateblue">🔈</button></td>
+    <td></td>
+    <td><button id='ChannelDown' class="text-large color-slateblue">CH-</button></td>
+</tr>
+<tr>
+    <td></td>
+    <td><button id='Up' class="text-large color-black">↑</button></td>
+    <td></td>
+</tr>  
+<tr>
+    <td><button id='Left' class="text-large color-black">←</button></td>
+    <td><button id='Enter' class="text-large color-black">⏎</button></td>
+    <td><button id='Right' class="text-large color-black">→</button></td>
+</tr>
+<tr>
+    <td><button id='Return'>Return</button></td>
+    <td><button id='Down' class="text-large color-black">↓</button></td>
+    <td><button id='Exit'>Exit</button></td>
+</tr>
+<tr>
+    <td><button id='Pause'>⏸️</button></td>
+    <td><button id='Play'>▶️</button></td>
+    <td><button id='Stop'>⏹️</button></td>
+</tr>
+</table>
+
+<script type="text/javascript">
+//http://xahlee.info/comp/unicode_computing_symbols.html
+document.querySelectorAll('button').forEach(function(a) { 
+  a.addEventListener('click', function(){
+    var id = this.id;
+    var command = COMMAND_MAP[this.id];
+    console.log(259, id, command, this);
+    sendCommand(command);
+  })
+})
+</script>
