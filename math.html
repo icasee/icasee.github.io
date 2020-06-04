@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+    <title>加減乘除</title>
+    <meta charset="utf-8">
+    <meta name="google" content="notranslate">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<style type="text/css">
+body {
+	background: #333;
+}
+div.contenter{
+	width: 800px;
+	margin: 0 auto;
+	text-align: center;
+}
+h1 {
+	font-size: 10em;
+	color: white;
+}
+input{
+	font-size: 2em;
+}
+span{
+	color: red;
+	position: fixed;
+	left: 0;
+	bottom:0;
+	padding: 5px;
+}
+</style>
+</head>
+<body>
+<div class="contenter">
+	<h1>準備</h1>
+	<form onsubmit="return myFunction()">
+		<input type="number" class="text">
+	</form>
+</div>
+<span>0</span>
+<script>
+
+var score = -1;
+var miutes = 0;
+var h1 = document.querySelector('h1');
+var text = document.querySelector('.text');
+var form = document.querySelector('form');
+var span = document.querySelector('span');
+var answer = 0;
+var timer = 0;
+
+function startGame(){
+	$.getJSON('config.json', function(data){
+		console.log(44, data);
+		score = data.multiplier.score;
+		miutes = data.multiplier.miutes;
+		//span.innerText = score;
+		question();
+	})
+}
+
+function getTime(){
+	return (new Date).getTime();
+}
+
+function getKeyCode(){
+  var a=getTime();
+  var b=("00"+miutes).substr(-2);
+  var d="8"+a.toString().substr(-3);
+  var c=d+''+b+''+a;
+  //console.log(29, d+b, a);
+  return (parseInt(d+b).toString(35)+'z'+parseInt(a).toString(35)).toUpperCase();
+}
+
+function getDay(){
+	return (new Date).getDay();
+}
+
+function myFunction() {
+	if (score == -1) {
+		startGame();
+		return false;
+	}
+
+	if (answer == text.value) {
+		score--;
+	} else {
+		score++;
+	}
+	if (score <= 0) {
+		if (localStorage.update == getDay()) {
+			alert('今天已經獎勵了，明天再試。');
+		} else {
+			alert(getKeyCode());
+			location.reload();
+		}
+	}
+	text.value='';
+	question()
+	return false;
+}
+
+function sort() {
+	return 0.5 - Math.random()
+}
+
+function random(a) {
+	return Math.ceil(Math.random()*a)
+}
+
+function question() {
+	var a = random(9)
+	var b = random(9)
+	var c = random(99)
+	var d = a*b
+	switch(Math.ceil(Math.random()*4)) {
+		case 1:  
+			answer = c+b;
+			h1.innerText = c + ' + ' + b;
+			break;
+		case 2:
+			answer = c-b;
+			h1.innerText = c + ' - ' + b;
+			break;
+		case 3:
+			answer = a*b;
+			h1.innerText = a + ' x ' + b;
+			break;
+		case 4:
+			answer = d/a;
+			h1.innerText = d + ' ÷ ' + a;
+			break;
+		default:
+			answer = (a+b)%a;
+			h1.innerText = (a+b) + ' % ' + a;
+			break;
+	}
+	span.innerText = score;
+	clearTimeout(timer);
+	timer = setTimeout(function(){
+		score++;
+		question();
+	}, 10000)
+}
+</script>
+</body>
+</html>

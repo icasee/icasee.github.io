@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+    <title>常用英文單字</title>
+    <meta charset="utf-8">
+    <meta name="google" content="notranslate">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<style type="text/css">
+body {
+	background: #333;
+}
+div.contenter{
+	width: 800px;
+	margin: 120px auto;
+	text-align: center;
+}
+h1 {
+	cursor: pointer;
+	font-size: 10em;
+	color: white;
+	margin: 0;
+	padding: 0;
+}
+h2 {
+	font-size: 2em;
+	color: white;
+	margin: 0;
+	padding: 0;
+	color: green;
+}
+input{
+	font-size: 2em;
+}
+span{
+	color: red;
+	position: fixed;
+	left: 0;
+	top:0;
+	padding: 5px;
+}
+</style>
+</head>
+<body>
+<div class="contenter">
+	<h1>準備</h1>
+	<h2></h2>
+	<form onsubmit="return myFunction()">
+		<input type="text" class="text">
+	</form>
+</div>
+
+<span>0</span>
+<script>
+var data=[];
+var score = -1;
+var miutes = 0;
+var h1 = document.querySelector('h1');
+var h2 = document.querySelector('h2');
+var text = document.querySelector('.text');
+var form = document.querySelector('form');
+var span = document.querySelector('span');
+var answer = 0;
+var timer = 0;
+var ssu = new SpeechSynthesisUtterance();
+
+$.getJSON( "./words.json", function( data ) {
+	window.data = data;
+});
+
+h1.addEventListener('click', function(){
+	ssu.text = word();
+	ssu.voice = window.speechSynthesis.getVoices()[49];
+	window.speechSynthesis.speak(ssu);	
+}, false);
+
+h2.addEventListener('click', function(){
+	ssu.text = chinese();
+	ssu.voice = window.speechSynthesis.getVoices()[64];
+	window.speechSynthesis.speak(ssu);	
+}, false);
+
+function getUKLang() {
+	window.speechSynthesis.getVoices().find(x => x.voiceURI == 'Google UK English Female')
+}
+
+function getHKLang() {
+	window.speechSynthesis.getVoices().find(x => x.lang == 'zh-HK')
+}
+
+function startGame(){
+	score = 30;
+	data.sort(() => Math.random() - 0.5);
+	question();
+}
+
+function getTime(){
+	return (new Date).getTime();
+}
+
+function getKeyCode(){
+  var a=getTime();
+  var b=("00"+10).substr(-2);
+  var d="8"+a.toString().substr(-3);
+  var c=d+''+b+''+a;
+  //console.log(29, d+b, a);
+  return (parseInt(d+b).toString(35)+'z'+parseInt(a).toString(35)).toUpperCase();
+}
+
+function getDay(){
+	return (new Date).getDay();
+}
+
+function myFunction() {
+	if (score == -1) {
+		startGame();
+		return false;
+	}
+
+	if (answer == text.value) {
+		score--;
+	} else {
+		score++;
+	}
+	if (score <= 0) {
+		if (localStorage.update == getDay()) {
+			alert('今天已經獎勵了，明天再試。');
+		} else {
+			alert(getKeyCode());
+			location.reload();
+		}
+		//localStorage.update = getDay();
+	}
+	text.value='';
+	question()
+	return false;
+}
+
+function word() {
+	return data[0].word;
+}
+
+function chinese() {
+	return data[0].chinese;
+}
+
+function speech(){
+	ssu.voice = window.speechSynthesis.getVoices()[49];
+	ssu.text = word();
+	window.speechSynthesis.speak(ssu);
+
+	setTimeout(function(){
+		ssu.text = chinese();
+		ssu.voice = window.speechSynthesis.getVoices()[64];
+		window.speechSynthesis.speak(ssu);	
+	}, 500);
+}
+
+function question() {
+	data.shift();
+	answer = word();
+	span.innerText = score;
+	h1.innerText = word()
+	h2.innerText = chinese();
+	speech();
+	clearTimeout(timer);
+	timer = setTimeout(function(){
+		score++;
+		question();
+	}, 90000)
+}
+</script>
+</body>
+</html>
