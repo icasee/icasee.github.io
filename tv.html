@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google" content="notranslate">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sony Tv Remote</title>
+</head>
+<style type="text/css">
+    html, body{
+        background: #111;
+    }
+    div.root{
+        margin: 0;
+        padding: 0;
+    }
+    button {
+        width: 100%;
+        height: 45px;
+        max-height: 45px;
+        border: 0;
+        border-radius: 5px;
+        color: black;
+        background: linear-gradient(to bottom, hsl(207, 25%, 87%), hsl(207, 25%, 75%));
+        box-shadow:
+                rgba(  0,  0,  0,0.5)  0px  1px 2px 2px,
+                rgba(  0,  0,  0,0.5) -1px -3px 3px 0px inset,
+                rgba(255,255,255,0.5)  1px  3px 3px 0px inset;
+    }
+    table{
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+        border-spacing: 8px;
+    }
+    td{ width: 31% }
+    button.red {
+        color: white;
+        background: linear-gradient(to bottom, hsl(0, 50%, 46%), hsl(0, 50%, 33%));
+    }
+    button.green {
+        color: white;
+        background: linear-gradient(to bottom, hsl(50%, 50%, 46%), hsl(50%, 50%, 33%));
+    }
+    button.white {
+        color: black;
+        background: linear-gradient(to bottom, hsl(230, 0%, 90%), hsl(230, 0%, 75%));
+    }
+    button.black {
+        color: white;
+        background: linear-gradient(to bottom, hsl(0, 0%, 25%), hsl(0, 0%, 13%));
+    }
+    button.blue {
+        color: black;
+        background: linear-gradient(to bottom, hsl(230, 50%, 63%), hsl(230, 50%, 75%));
+    }
+    button.large { font-size: 1.75em !important; }
+    button.none{ opacity: 0; }
+    button.tv::after { content: "TV"; }
+    button.tvpower::after { content: "⎋"; }
+    button.return::after { content: "⏎"; }
+    button.dpadcenter::after { content: "OK"; }
+    button.netflix::after { content: "NETFLIX"; }
+    button.home::after { content: "HOME"; }
+    button.enter::after { content: "OK"; }
+    button.exit::after { content: "Exit"; }
+    button.num0::after { content: "0"; }
+    button.num1::after { content: "1"; }
+    button.num2::after { content: "2"; }
+    button.num3::after { content: "3"; }
+    button.num4::after { content: "4"; }
+    button.num5::after { content: "5"; }
+    button.num6::after { content: "6"; }
+    button.num7::after { content: "7"; }
+    button.num8::after { content: "8"; }
+    button.num9::after { content: "9"; }
+    button.volumeup::after { content: "🔊"; }
+    button.volumedown::after { content: "🔈"; }
+    button.mute::after { content: "🔇"; }
+    button.channelup::after { content: "CH+"; }
+    button.channeldown::after { content: "CH-"; }
+    button.pause::after { content: "⏸️"; }
+    button.play::after { content: "▶️"; }
+    button.stop::after { content: "⏹️"; }
+    button.up::after { content: "↑️"; }
+    button.left::after { content: "←️"; }
+    button.right::after { content: "→️"; }
+    button.down::after { content: "↓"; }
+</style>
+<body>
+
+<div id="root"></div>
+
+<script src="kotlin.js"></script>
+<script src="kotlinx-html-js.js"></script>
+<script src="sony_tv_remote.js"></script>
+
+
+</body>
+</html>
