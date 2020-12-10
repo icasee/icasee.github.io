@@ -1,0 +1,223 @@
+<html lang="zh-hk">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <meta name="apple-itunes-app" content="app-id=480933058">
+    <title>時間表</title>
+<script type="text/javascript">
+
+</script>
+<style type="text/css">
+html, body{
+  background: #fff;
+}
+table{
+  width: 100%;
+}
+tr{
+  height: 30px;
+}
+td{
+  text-align: center;
+}
+tr.header td.active{
+  color: white;
+  background: red;
+}
+tr.body td.active{
+  color: white;
+  background: blue;
+}
+td.active{
+  color: white;
+  background: green;
+}
+</style>
+<h1></h1>
+<table align="center" border="1">
+  <tr class="header">
+    <td width="14%">節次</td>
+    <td width="20%">時間</td>
+    <td width="11%" id="A">Day1</td>
+    <td width="11%" id="B">Day2</td>
+    <td width="11%" id="C">Day3</td>
+    <td width="11%" id="D">Day4</td>
+    <td width="11%" id="E">Day5</td>
+    <td width="11%" id="F">Day6</td>
+  </tr>  
+  <tr>
+      <td></td>
+      <td></td>
+      <td colspan="6"></td>
+  </tr>
+  <tr class="body">
+    <td>1</td>
+    <td>08:15-08:50</td>
+    <td id="A1">數學</td>
+    <td id="B1">數學</td>
+    <td id="C1">英文</td>
+    <td id="D1">數學</td>
+    <td id="E1">中文</td>
+    <td id="F1">數學</td>
+  </tr>  
+  <tr class="body">
+    <td>2</td>
+    <td>08:50-09:25</td>
+    <td id="A2">中文</td>
+    <td id="B2">英文</td>
+    <td id="C2">數學</td>
+    <td id="D2"></td>
+    <td id="E2"></td>
+    <td id="F2">英文</td>
+  </tr>  
+  <tr class="body">
+    <td>3</td>
+    <td>09:25-10:00</td>
+    <td id="A3">英文</td>
+    <td id="B3">常識</td>
+    <td id="C3"></td>
+    <td id="D3">英文</td>
+    <td id="E3">數學</td>
+    <td id="F3"></td>
+  </tr>  
+  <tr>
+      <td></td>
+      <td>10:00-10:20</td>
+      <td colspan="6" id="ONE">第一小息</td>
+  </tr>
+  <tr class="body">
+    <td>4</td>
+    <td>10:20-11:00</td>
+    <td id="A4"></td>
+    <td id="B4">中文</td>
+    <td id="C4">中文</td>
+    <td id="D4"></td>
+    <td id="E4">PLPR</td>
+    <td id="F4"></td>
+  </tr>  
+  <tr class="body">
+    <td>5</td>
+    <td>11:00-11:35</td>
+    <td id="A5"></td>
+    <td id="B5"></td>
+    <td id="C5"></td>
+    <td id="D5">常識</td>
+    <td id="E5"></td>
+    <td id="F5">中文</td>
+  </tr>  
+  <tr>
+      <td></td>
+      <td>11:35-11:45</td>
+      <td colspan="6" id="TWO">第二小息</td>
+  </tr>
+  <tr class="body">
+    <td>6</td>
+    <td>11:45-12:20</td>
+    <td id="A6">常識</td>
+    <td id="B6"></td>
+    <td id="C6">常識</td>
+    <td id="D6">普通話</td>
+    <td id="E6"></td>
+    <td id="F6">宗教</td>
+  </tr>  
+  <tr class="body">
+    <td>7</td>
+    <td>12:20-12:55</td>
+    <td id="A7"></td>
+    <td id="B7"></td>
+    <td id="C7"></td>
+    <td id="D7">中文</td>
+    <td id="E7"></td>
+    <td id="F7">常識</td>
+  </tr>  
+
+</table>
+<script type="text/javascript">
+var begin = new Date('2020/12/04');
+var today = new Date();
+//var today = new Date('2020/12/16 11:00');
+var year = today.getFullYear();
+var month = today.getMonth() +1
+var date = today.getDate();
+var week = today.getDay();
+var weekname = ["日", "一", "二", "三", "四", "五", "六"];
+
+function addText(text) {
+  document.querySelector('h1').insertAdjacentHTML('beforeend', text);
+
+}
+function getTime(hour, minuts){
+  var d1 = new Date(today);
+  d1.setHours(hour);
+  d1.setMinutes(minuts);
+  return d1.getTime()
+}
+function getWorkingDays(startDate, endDate){
+    var result = 0;
+    var currentDate = startDate;
+    while (currentDate <= endDate)  {  
+
+        var weekDay = currentDate.getDay();
+        if(weekDay != 0 && weekDay != 6) {
+            result++;
+        }
+        
+        currentDate.setDate(currentDate.getDate()+1);
+    }
+
+    return result;
+}
+
+function setClass(name) {
+  var d = document.querySelector(name);
+  if (d != null) {
+    d.className='active';
+  }
+}
+
+//setInterval
+var diff = (getWorkingDays(begin, today) % 6);
+var day = ((diff == 0) ? 6 : diff);
+var char = String.fromCharCode(64 + day);
+
+setInterval(() => {
+
+  var time = today.getTime()
+  var part = 0
+
+  if (time >= getTime(8, 15) && time <= getTime(8, 50)) {
+    part = char+1
+  } else if (time >= getTime(8, 50) && time <= getTime(9, 25)) {
+    part = char+2
+  } else if (time >= getTime(9, 25) && time <= getTime(10, 0)) {
+    part = char+3
+  } else if (time >= getTime(10, 0) && time <= getTime(10, 20)) {
+    part = 'ONE'
+  } else if (time >= getTime(10, 20) && time <= getTime(11, 0)) {
+    part = char+4
+  } else if (time >= getTime(11, 0) && time <= getTime(11, 35)) {
+    part = char+5
+  } else if (time >= getTime(11, 35) && time <= getTime(11, 45)) {
+    part = 'TWO'
+  } else if (time >= getTime(11, 45) && time <= getTime(12, 20)) {
+    part = char+6
+  } else if (time >= getTime(12, 20) && time <= getTime(12, 55)) {
+    part = char+7
+  } else {
+    part = char+0
+  }
+
+  document.querySelector('h1').innerHTML = '';
+  addText(today.toString().substr(0, 21));
+  addText('(星期'+weekname[week]+')');
+  //addText(part);
+  document.title = day;
+  document.querySelectorAll('.active').forEach(a => a.className='');
+  setClass('#'+char);
+  setClass('#'+part);
+
+}, 1000)
+</script>
+
