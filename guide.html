@@ -135,15 +135,6 @@ td.active{
 
 </table>
 <script type="text/javascript">
-var begin = new Date('2020/12/04');
-var today = new Date();
-//var today = new Date('2020/12/16 11:00');
-var year = today.getFullYear();
-var month = today.getMonth() +1
-var date = today.getDate();
-var week = today.getDay();
-var weekname = ["日", "一", "二", "三", "四", "五", "六"];
-
 function addText(text) {
   document.querySelector('h1').insertAdjacentHTML('beforeend', text);
 
@@ -178,12 +169,19 @@ function setClass(name) {
 }
 
 //setInterval
+var begin = new Date('2020/12/04');
+var today = new Date();
+var year = today.getFullYear();
+var month = today.getMonth() +1
+var date = today.getDate();
+var week = today.getDay();
+var weekname = ["日", "一", "二", "三", "四", "五", "六"];
 var diff = (getWorkingDays(begin, today) % 6);
 var day = ((diff == 0) ? 6 : diff);
 var char = String.fromCharCode(64 + day);
 
 setInterval(() => {
-
+  today = new Date();
   var time = today.getTime()
   var part = 0
 
@@ -210,14 +208,26 @@ setInterval(() => {
   }
 
   document.querySelector('h1').innerHTML = '';
-  addText(today.toString().substr(0, 21));
+  addText(today.toString().substr(0, 24));
   addText('(星期'+weekname[week]+')');
   //addText(part);
-  document.title = day;
-  document.querySelectorAll('.active').forEach(a => a.className='');
+  //document.title = day;
+  var title = ''
+  document.querySelectorAll('.active').forEach(a => {
+    a.className='';
+    title += a.innerText;
+  });
+  document.title = title;
+
   setClass('#'+char);
   setClass('#'+part);
 
+  console.log(221)
 }, 1000)
+
+setTimeout(() => {
+  console.log(225)
+  location.reload()
+}, 3600000)
 </script>
 
