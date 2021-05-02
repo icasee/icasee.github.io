@@ -13,6 +13,9 @@
 html, body{
   background: #fff;
 }
+h1{
+  cursor: pointer;
+}
 table{
   width: 100%;
 }
@@ -146,7 +149,7 @@ function getTime(hour, minuts){
   return d1.getTime()
 }
 function getWorkingDays(startDate, endDate){
-    var result = 0;
+    var result = adjust;
     var currentDate = startDate;
     while (currentDate <= endDate)  {  
 
@@ -168,7 +171,18 @@ function setClass(name) {
   }
 }
 
+//listener
+document.querySelector('h1').addEventListener('click', () => {
+  var a=prompt('日子修正', 1);
+  if (a * 1 == a) {
+    localStorage['adjust'] = a;
+    location.reload();
+  }
+}, false)
+
+
 //setInterval
+var adjust = localStorage['adjust'] || 0
 var begin = new Date('2021/04/07');
 var today = new Date();
 var year = today.getFullYear();
