@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<style>
+div.a{
+    width: 200px;
+    font-size:120px; 
+    float:left;
+    text-align:center;
+}
+div.b{
+    width: 100px;
+    text-align:center;
+    padding:60px 20px;
+    font-size:120px; 
+    float:left;
+}
+hr{
+    padding: 0;
+    margin: 0;
+    border:2px solid #000;
+}
+input{
+    text-align:center;
+    padding: 0;
+    margin: 0;
+    font-size:120px; 
+    border:0;
+    width:200px;
+}
+div.main{
+    padding: 50px;
+}
+div.score{
+    position: absolute;
+    padding: 5px;
+    top: 0;
+    left: 0;
+    background-color: #000;
+    width: 100%;
+    color:white
+}
+</style>
+
+<div class="main">
+    <div class="a">
+        <div class="quest"></div>
+    </div>
+
+    <div class="b">
+        =
+    </div>
+
+    <div class="a">
+        <input type="text" placeholder="?" name="a"><hr><input type="text" placeholder="?" name="b">
+    </div>
+</div>
+
+<div class="score">
+    正確<span class="a">0</span>
+    錯誤<span class="b">0</span>
+</div>
+
+<script language="javascript">
+var quest = document.querySelector('div.quest');
+var q1=0;
+var q2=0;
+var s1=0;
+var s2=0;
+function random(a) {
+    return Math.round(Math.random() * a) +1
+}
+
+function question(){
+    var c=random(9);
+    q1=random(9)*c;
+    q2=(random(9)+10)*c;
+    document.querySelector('input[name=a]').value='';
+    document.querySelector('input[name=b]').value='';
+    document.querySelector('input[name=a]').focus();
+    quest.innerHTML = q1+"<hr>"+q2;
+}
+
+
+function getHCF(a, b) {
+    // looping from 1 to number1 and number2 to find HCF
+    for (let i = 1; i <= a && i <= b; i++) {
+
+        // check if is factor of both integers
+        if( a % i == 0 && b % i == 0) {
+            hcf = i;
+        }
+    }
+    return hcf
+}
+
+window.onkeyup = function(e){
+    var hcf = getHCF(q1, q2)
+    var a = q1 / hcf;
+    var b = q2 / hcf;
+    var c = a == document.querySelector('input[name=a]').value
+    var d = b == document.querySelector('input[name=b]').value
+    if (e.code == "Enter") {
+        if (c && d) {
+            s1+=1;
+            document.querySelector('.score .a').innerText=s1;
+        } else {
+            alert(q1+'及'+q2+"的最大公倍是:"+hcf+'\n答案是:' + a + '及' + b);
+            s2+=1;
+            document.querySelector('.score .b').innerText=s2;
+        }
+        question();
+    }
+}
+question();
+</script>
+</body>
+</html>
